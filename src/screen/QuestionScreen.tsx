@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { Button } from '@rneui/base';
-import { QUESTION } from '../constants';
+import { QUESTIONS } from '../constants';
 
 type ListQuestion = {
   answer: string;
@@ -26,7 +26,7 @@ type QuestionType = {
 
 export default function QuestionScreen({ navigation }: any) {
   const [page, setPage] = useState(1)
-  const [questionList, setQuestionList] = useState<QuestionType[]>(QUESTION)
+  const [questionList, setQuestionList] = useState<QuestionType[]>(QUESTIONS)
   const question = questionList[page - 1]
   const index = page - 1
 
@@ -58,7 +58,7 @@ export default function QuestionScreen({ navigation }: any) {
     }
   }
 
-  function sumPoints(questions: typeof QUESTION): number {
+  function sumPoints(questions: typeof QUESTIONS): number {
     let totalPoints = 0;
     for (const question of questions) {
       totalPoints += question.point;
@@ -130,7 +130,7 @@ export default function QuestionScreen({ navigation }: any) {
 
             <Button
               onPress={() => {
-                if (page < QUESTION.length) {
+                if (page < QUESTIONS.length) {
                   setPage(prev => prev + 1)
                 }
               }}

@@ -9,7 +9,7 @@ export default function LeaderScreen({ route }: any) {
 
   return (
     <View style={{ padding: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'white', height: '100%' }}>
-      <Text style={styles.text}>LeaderBorder</Text>
+      <Text style={styles.text}>LeaderBoard</Text>
       <Text style={{ ...styles.text, marginTop: 20 }}>Your Score : {point}</Text>
       <View style={{ marginTop: 20, width: '100%', gap: 10, }}>
         {top3Leader.map((item, index) => {
