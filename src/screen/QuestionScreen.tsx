@@ -23,10 +23,20 @@ type QuestionType = {
   point: number;
 }
 
+const shuffleQuestions = (questions: QuestionType[]) => {
+  const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
 
+  shuffledQuestions.forEach((question) => {
+    question.listQuestion = question.listQuestion.sort(() => Math.random() - 0.5);
+  });
+
+  return shuffledQuestions;
+};
+
+const data = shuffleQuestions(QUESTIONS)
 export default function QuestionScreen({ navigation }: any) {
   const [page, setPage] = useState(1)
-  const [questionList, setQuestionList] = useState<QuestionType[]>(QUESTIONS)
+  const [questionList, setQuestionList] = useState<QuestionType[]>(data)
   const question = questionList[page - 1]
   const index = page - 1
 
