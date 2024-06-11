@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Button,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -10,10 +9,43 @@ import {
 } from 'react-native';
 
 import { QUESTION } from './src/constants';
+import { Button } from '@rneui/base';
 
 function App(): React.JSX.Element {
   const [page, setPage] = useState(1)
-  const question = QUESTION[page - 1]
+  const [questionList, setQuestionList] = useState(QUESTION)
+  const question = questionList[page - 1]
+  const index = page - 1
+  console.log(questionList)
+
+  const handleAnswer = (indexAnswer: number) => {
+    setQuestionList(prev => prev.map(((question, indexQuestion) => {
+      if (indexQuestion === index) {
+        return ({
+          ...question,
+          choseAnswer: indexAnswer,
+          point: question.listQuestion[indexAnswer].correct ? 1 : 0
+        })
+      }
+      return question
+    })))
+  }
+
+  const getCharacter = (id: number) => {
+    switch (id) {
+      case 0:
+        return "A."
+      case 1:
+        return "B."
+      case 2:
+        return "C."
+      case 3:
+        return "D."
+      default:
+        break;
+    }
+  }
+
   return (
     <SafeAreaView style={{ padding: 10, }}>
       <View style={{ display: 'flex', flexDirection: 'row', position: 'static', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
@@ -32,46 +64,63 @@ function App(): React.JSX.Element {
               </View>
             </View>
 
-            <TouchableHighlight
-              style={styles.btnChoice}
-              onPress={() => console.log('Left button pressed')}
-              underlayColor="lightgray"
-            >
-              <Text style={styles.textChoice}>A. {question.listQuestion[0].answer}</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.btnChoice}
-              onPress={() => console.log('Left button pressed')}
-              underlayColor="lightgray"
-            >
-              <Text style={styles.textChoice}>B. {question.listQuestion[1].answer}</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.btnChoice}
-              onPress={() => console.log('Left button pressed')}
-              underlayColor="lightgray"
-            >
-              <Text style={styles.textChoice}>C. {question.listQuestion[2].answer}</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.btnChoice}
-              onPress={() => console.log('Left button pressed')}
-              underlayColor="lightgray"
-            >
-              <Text style={styles.textChoice}>D. {question.listQuestion[3].answer}</Text>
-            </TouchableHighlight>
+            {question.listQuestion.map((item, index) => (
+              <React.Fragment key={index}>
+                <Button
+                  onPress={() => handleAnswer(index)}
+                  title={`${getCharacter(index)} ${item.answer}`}
+                  loading={false}
+                  buttonStyle={{
+                    backgroundColor: `${question.choseAnswer === index ? "rgb(128, 191, 255)" : "rgb(191, 191, 191)"}`,
+                    borderRadius: 5,
+                  }}
+                  titleStyle={{ fontWeight: 'bold', fontSize: 23, color: `${question.choseAnswer === index ? "rgba(255, 255, 255, 1)" : "rgb(26, 26, 26)"}` }}
+                  containerStyle={{
+                    height: 60,
+                    width: "100%",
+                  }}
+                />
+              </React.Fragment>
+            ))}
           </View>
           <View style={{ flexDirection: 'row', display: 'flex', gap: 10 }}>
-            <Button title='PREV' onPress={() => {
-              if (page > 1) {
-                setPage(prev => prev - 1)
-              }
-            }} />
-            <Button title='NEXT' onPress={() => {
-              if (page < QUESTION.length) {
-                setPage(prev => prev + 1)
-              }
-            }} />
+            <Button
+              onPress={() => {
+                if (page > 1) {
+                  setPage(prev => prev - 1)
+                }
+              }}
+              title={`Prev`}
+              loading={false}
+              buttonStyle={{
+                backgroundColor: "rgb(128, 191, 255)",
+                borderRadius: 5,
+              }}
+              titleStyle={{ fontWeight: 'bold', fontSize: 23, color: "rgba(255, 255, 255, 1)" }}
+              containerStyle={{
+                height: 60,
+                width: "auto",
+              }}
+            />
+
+            <Button
+              onPress={() => {
+                if (page < QUESTION.length) {
+                  setPage(prev => prev + 1)
+                }
+              }}
+              title={`Next`}
+              loading={false}
+              buttonStyle={{
+                backgroundColor: "rgb(128, 191, 255)",
+                borderRadius: 5,
+              }}
+              titleStyle={{ fontWeight: 'bold', fontSize: 23, color: "rgba(255, 255, 255, 1)" }}
+              containerStyle={{
+                height: 60,
+                width: "auto",
+              }}
+            />
           </View>
         </View>
       </ScrollView>
