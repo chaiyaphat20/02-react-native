@@ -1,0 +1,21 @@
+{
+  "cSpell.words": [
+    "deconsolidation",
+    "Dinero",
+    "googlemaps",
+    "hookform",
+    "lucide",
+    "reduxjs",
+    "tailwindcss",
+    "uuidv"
+  ],
+  "cSpell.ignoreRegExpList": [
+    "/[\\u0E00-\\u0E7F]/g"
+  ],
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "i18n-ally.localesPaths": [
+    "messages"
+  ],
+  "typescript.preferences.importModuleSpecifier": "project-relative"
+}
