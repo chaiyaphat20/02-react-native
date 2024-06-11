@@ -64,7 +64,7 @@ export default function QuestionScreen() {
 
   const isCompleteAnswer = countChosenAnswers(questionList) === questionList.length
   return (
-    <SafeAreaView style={{ padding: 10, }}>
+    <SafeAreaView style={{ padding: 10, backgroundColor: 'white' }}>
       <View style={{ display: 'flex', flexDirection: 'row', position: 'static', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
         <Text style={styles.title}>{page} of 20</Text>
       </View>
