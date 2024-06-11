@@ -11,9 +11,22 @@ import {
 import { QUESTION } from './src/constants';
 import { Button } from '@rneui/base';
 
+type ListQuestion = {
+  answer: string;
+  correct: boolean;
+}
+
+type QuestionType = {
+  id: number;
+  question: string;
+  listQuestion: ListQuestion[];
+  choseAnswer: number;
+  point: number;
+}
+
 function App(): React.JSX.Element {
   const [page, setPage] = useState(1)
-  const [questionList, setQuestionList] = useState(QUESTION)
+  const [questionList, setQuestionList] = useState<QuestionType[]>(QUESTION)
   const question = questionList[page - 1]
   const index = page - 1
   console.log(questionList)
@@ -45,6 +58,12 @@ function App(): React.JSX.Element {
         break;
     }
   }
+
+  const countChosenAnswers = (questions: QuestionType[]) => {
+    return questions.filter(question => question.choseAnswer > -1).length;
+  }
+
+  const isCompleteAnswer = countChosenAnswers(questionList) === questionList.length
 
   return (
     <SafeAreaView style={{ padding: 10, }}>
@@ -121,6 +140,22 @@ function App(): React.JSX.Element {
               }}
             />
           </View>
+          {isCompleteAnswer && <View >
+            <Button
+              title="SUBMIT"
+              buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)' }}
+              containerStyle={{
+                height: 40,
+                width: 200,
+                marginHorizontal: 50,
+                marginVertical: 10,
+              }}
+              titleStyle={{
+                color: 'white',
+                marginHorizontal: 20,
+              }}
+            />
+          </View>}
         </View>
       </ScrollView>
     </SafeAreaView>
