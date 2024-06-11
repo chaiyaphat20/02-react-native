@@ -24,7 +24,8 @@ type QuestionType = {
   point: number;
 }
 
-export default function QuestionScreen() {
+
+export default function QuestionScreen({ navigation }: any) {
   const [page, setPage] = useState(1)
   const [questionList, setQuestionList] = useState<QuestionType[]>(QUESTION)
   const question = questionList[page - 1]
@@ -141,6 +142,7 @@ export default function QuestionScreen() {
           {isCompleteAnswer && <View >
             <Button
               title="SUBMIT"
+              onPress={() => navigation.navigate('LeaderScreen')}
               buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)' }}
               containerStyle={{
                 height: 40,
