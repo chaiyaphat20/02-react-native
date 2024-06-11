@@ -9,12 +9,12 @@ export default function LeaderScreen({ route }: any) {
 
   return (
     <View style={{ padding: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'white', height: '100%' }}>
-      <Text style={styles.text}>LeaderBoard</Text>
+      <Text style={styles.text}>LeaderBoard Top 3</Text>
       <Text style={{ ...styles.text, marginTop: 20 }}>Your Score : {point}</Text>
       <View style={{ marginTop: 20, width: '100%', gap: 10, }}>
         {top3Leader.map((item, index) => {
           return <View key={index} style={{ display: 'flex', backgroundColor: '#EEEE', flexDirection: 'row', padding: 10, justifyContent: 'space-between' }}>
-            <Text style={styles.text}> {item.name}</Text>
+            <Text style={styles.text}>{index + 1}. {item.name}</Text>
             <Text style={styles.text}> {item.point}</Text>
           </View>
         })}
