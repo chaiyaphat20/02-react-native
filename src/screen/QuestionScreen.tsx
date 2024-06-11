@@ -4,7 +4,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -59,11 +58,20 @@ export default function QuestionScreen({ navigation }: any) {
     }
   }
 
+  function sumPoints(questions: typeof QUESTION): number {
+    let totalPoints = 0;
+    for (const question of questions) {
+      totalPoints += question.point;
+    }
+    return totalPoints;
+  }
+
   const countChosenAnswers = (questions: QuestionType[]) => {
     return questions.filter(question => question.choseAnswer > -1).length;
   }
 
   const isCompleteAnswer = countChosenAnswers(questionList) === questionList.length
+  const totalPoints = sumPoints(questionList);
   return (
     <SafeAreaView style={{ padding: 10, backgroundColor: 'white' }}>
       <View style={{ display: 'flex', flexDirection: 'row', position: 'static', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
@@ -142,7 +150,7 @@ export default function QuestionScreen({ navigation }: any) {
           {isCompleteAnswer && <View >
             <Button
               title="SUBMIT"
-              onPress={() => navigation.navigate('LeaderScreen')}
+              onPress={() => navigation.navigate('LeaderScreen', { point: totalPoints })}
               buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)' }}
               containerStyle={{
                 height: 40,
