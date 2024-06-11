@@ -49,8 +49,7 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{ padding: 10, }}>
       <View style={{ display: 'flex', flexDirection: 'row', position: 'static', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
-        <Text style={{ fontSize: 18 }}>{page} of 20</Text>
-        <Text style={{ fontSize: 18 }}>Time</Text>
+        <Text style={styles.title}>{page} of 20</Text>
       </View>
       <ScrollView>
         <View style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'white', flex: 1, alignItems: 'center' }}>
@@ -83,7 +82,7 @@ function App(): React.JSX.Element {
               </React.Fragment>
             ))}
           </View>
-          <View style={{ flexDirection: 'row', display: 'flex', gap: 10 }}>
+          <View style={{ flexDirection: 'row', display: 'flex', gap: 40 }}>
             <Button
               onPress={() => {
                 if (page > 1) {
