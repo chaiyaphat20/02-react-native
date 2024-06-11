@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import QuestionScreen from './src/screen/QuestionScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function App(): React.JSX.Element {
+import { View } from 'react-native';
 
+
+const Stack = createNativeStackNavigator();
+export default function App() {
   return (
-    <QuestionScreen />
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='QuestionScreen'>
+        <Stack.Screen name="QuestionScreen" component={QuestionScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-
-
-export default App;
